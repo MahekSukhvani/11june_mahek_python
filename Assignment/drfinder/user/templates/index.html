@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DR.FINDER - Find Your Perfect Doctor</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: #667eea;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+        }
+
+        .section {
+            padding: 4rem 0;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .section:nth-child(even) {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Home Section */
+        .hero {
+            text-align: center;
+            padding: 6rem 0;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: slideInDown 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: slideInUp 1s ease 0.3s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeIn 1s ease 0.6s both;
+        }
+
+        /* Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            transform: translateY(0);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+            text-align: center;
+        }
+
+        .card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        /* Doctor Cards */
+        .doctor-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .doctor-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .doctor-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .doctor-rating {
+            color: #666;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+            padding: 0.5rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Stats and Features */
+        .stat-card, .feature-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover, .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #666;
+            font-weight: 600;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .logo-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+
+            .auth-buttons {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .contact-form {
+                margin: 0;
+            }
+
+            .contact-info > div:first-child {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-section > div:last-child {
+                grid-template-columns: 1fr !important;
+                gap: 2rem;
+            }
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            position: relative;
+            animation: slideInDown 0.3s ease;
+        }
+
+        .close {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .close:hover {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo">
+                <div class="logo-icon">🏥</div>
+                DR.FINDER
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home" onclick="showSection('home')">Home</a></li>
+                <li><a href="#about" onclick="showSection('about')">About Us</a></li>
+                <li><a href="#doctors" onclick="showSection('doctors')">Doctors</a></li>
+                <li><a href="#facilities" onclick="showSection('facilities')">Facilities</a></li>
+                <li><a href="#contact" onclick="showSection('contact')">Contact Us</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <button class="btn btn-secondary" onclick="openModal('loginModal')">Login</button>
+                <button class="btn btn-primary" onclick="openModal('signupModal')">Sign Up</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Section -->
+        <section id="home" class="section hero">
+            <div class="container">
+                <h1>Find Your Perfect Doctor</h1>
+                <p>Connect with qualified healthcare professionals in your area. Quality care is just a click away.</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="showSection('doctors')">Find Doctors</button>
+                    <button class="btn btn-secondary" onclick="showSection('about')">Learn More</button>
+                </div>
+                
+                <!-- Stats Section -->
+                <div class="stats-section" style="margin-top: 4rem;">
+                    <div class="cards-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">500+</div>
+                            <div class="stat-label">Qualified Doctors</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">50,000+</div>
+                            <div class="stat-label">Happy Patients</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">25+</div>
+                            <div class="stat-label">Medical Specialties</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">24/7</div>
+                            <div class="stat-label">Emergency Care</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Features Section -->
+                <div class="features-section" style="margin-top: 4rem;">
+                    <h2 style="text-align: center; margin-bottom: 2rem; color: white;">Why Choose DR.FINDER?</h2>
+                    <div class="cards-grid">
+                        <div class="feature-card">
+                            <span class="feature-icon">🔍</span>
+                            <h3>Easy Search</h3>
+                            <p>Find doctors by specialty, location, or availability with our advanced search filters.</p>
+                        </div>
+                        <div class="feature-card">
+                            <span class="feature-icon">📅</span>
+                            <h3>Online Booking</h3>
+                            <p>Book appointments instantly with real-time availability and automated confirmations.</p>
+                        </div>
+                        <div class="feature-card">
+                            <span class="feature-icon">⭐</span>
+                            <h3>Verified Reviews</h3>
+                            <p>Read authentic patient reviews and ratings to make informed healthcare decisions.</p>
+                        </div>
+                        <div class="feature-card">
+                            <span class="feature-icon">💬</span>
+                            <h3>Telemedicine</h3>
+                            <p>Consult with doctors remotely through secure video calls and chat messaging.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about" class="section" style="display: none;">
+            <div class="container">
+                <h2 class="section-title">About DR.FINDER</h2>
+                
+                <!-- Company Story -->
+                <div class="about-story" style="text-align: center; margin-bottom: 4rem;">
+                    <div class="story-content" style="background: rgba(255, 255, 255, 0.95); border-radius: 15px; padding: 3rem; max-width: 800px; margin: 0 auto; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);">
+                        <h3 style="color: #667eea; margin-bottom: 1.5rem; font-size: 1.8rem;">Our Story</h3>
+                        <p style="font-size: 1.1rem; line-height: 1.8; color: #555; margin-bottom: 1.5rem;">
+                            Founded in 2020, DR.FINDER was born from a simple yet powerful idea: healthcare should be accessible, transparent, and patient-centered. Our founders, a team of medical professionals and tech innovators, recognized the challenges patients face when trying to find the right healthcare provider.
+                        </p>
+                        <p style="font-size: 1.1rem; line-height: 1.8; color: #555;">
+                            Today, we're proud to serve over 50,000 patients and work with more than 500 qualified healthcare professionals across multiple specialties. Our platform has facilitated over 100,000 successful appointments, making quality healthcare more accessible than ever before.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <span class="card-icon">🎯</span>
+                        <h3>Our Mission</h3>
+                        <p>To bridge the gap between patients and healthcare providers by offering a comprehensive platform that makes finding the right doctor simple, fast, and reliable. We believe everyone deserves access to quality healthcare.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">👥</span>
+                        <h3>Our Team</h3>
+                        <p>A dedicated team of healthcare professionals, software engineers, and customer service specialists working together to revolutionize how patients connect with doctors. Our diverse expertise ensures the best user experience.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">🌟</span>
+                        <h3>Our Vision</h3>
+                        <p>To create a world where quality healthcare is accessible to everyone, regardless of location or background, through innovative technology solutions that prioritize patient needs and outcomes.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">🔒</span>
+                        <h3>Privacy & Security</h3>
+                        <p>We maintain the highest standards of data protection and patient privacy. All medical information is encrypted and stored securely, complying with HIPAA regulations and international privacy standards.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">🏆</span>
+                        <h3>Quality Assurance</h3>
+                        <p>Every healthcare provider on our platform is thoroughly vetted and verified. We ensure all doctors are licensed, board-certified, and maintain excellent professional standards and patient satisfaction ratings.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">🌍</span>
+                        <h3>Community Impact</h3>
+                        <p>We're committed to improving healthcare access in underserved communities through partnerships with local clinics, free health screenings, and educational programs about preventive care.</p>
+                    </div>
+                </div>
+
+                <!-- Values Section -->
+                <div class="values-section" style="margin-top: 4rem;">
+                    <h3 style="text-align: center; color: white; margin-bottom: 2rem; font-size: 2rem;">Our Core Values</h3>
+                    <div class="values-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                        <div class="value-item" style="text-align: center; color: white;">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">💙</div>
+                            <h4 style="margin-bottom: 1rem;">Compassion</h4>
+                            <p>We care deeply about every patient's journey and strive to provide empathetic, personalized healthcare experiences.</p>
+                        </div>
+                        <div class="value-item" style="text-align: center; color: white;">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">⚡</div>
+                            <h4 style="margin-bottom: 1rem;">Innovation</h4>
+                            <p>We continuously evolve our technology to provide cutting-edge solutions that improve healthcare accessibility and quality.</p>
+                        </div>
+                        <div class="value-item" style="text-align: center; color: white;">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">🤝</div>
+                            <h4 style="margin-bottom: 1rem;">Trust</h4>
+                            <p>We build lasting relationships based on transparency, reliability, and unwavering commitment to patient confidentiality.</p>
+                        </div>
+                        <div class="value-item" style="text-align: center; color: white;">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">🎯</div>
+                            <h4 style="margin-bottom: 1rem;">Excellence</h4>
+                            <p>We maintain the highest standards in everything we do, from our technology platform to our customer service and medical partnerships.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Doctors Section -->
+        <section id="doctors" class="section" style="display: none;">
+            <div class="container">
+                <h2 class="section-title">Our Medical Professionals</h2>
+                
+                <!-- Search and Filter -->
+                <div class="doctor-search" style="text-align: center; margin-bottom: 3rem;">
+                    <div style="background: rgba(255, 255, 255, 0.95); border-radius: 15px; padding: 2rem; max-width: 600px; margin: 0 auto; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);">
+                        <h3 style="color: #667eea; margin-bottom: 1.5rem;">Find Your Doctor</h3>
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+                            <input type="text" placeholder="Search by name or specialty..." style="flex: 1; min-width: 250px; padding: 0.75rem; border: 2px solid #e1e5e9; border-radius: 8px; font-size: 1rem;">
+                            <button class="btn btn-primary">Search</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="doctor-card">
+                        <div class="doctor-avatar">👨‍⚕️</div>
+                        <h3>Dr. Michael Johnson</h3>
+                        <p><strong>Cardiologist</strong></p>
+                        <p>15+ years experience in cardiovascular medicine. Specializes in heart disease prevention, cardiac catheterization, and advanced heart failure treatment.</p>
+                        <div class="doctor-rating">⭐⭐⭐⭐⭐ 4.9/5 (127 reviews)</div>
+                        <button class="btn btn-primary">Book Appointment</button>
+                    </div>
+                    <div class="doctor-card">
+                        <div class="doctor-avatar">👩‍⚕️</div>
+                        <h3>Dr. Sarah Williams</h3>
+                        <p><strong>Pediatrician</strong></p>
+                        <p>Dedicated to children's health with 12+ years of experience. Expert in child development, immunizations, and adolescent medicine.</p>
+                        <div class="doctor-rating">⭐⭐⭐⭐⭐ 4.8/5 (203 reviews)</div>
+                        <button class="btn btn-primary">Book Appointment</button>
+                    </div>
+                    <div class="doctor-card">
+                        <div class="doctor-avatar">👨‍⚕️</div>
+                        <h3>Dr. David Chen</h3>
+                        <p><strong>Orthopedic Surgeon</strong></p>
+                        <p>Specializes in sports medicine and joint replacement surgery. 18+ years of surgical experience with minimally invasive techniques.</p>
+                        <div class="doctor-rating">⭐⭐⭐⭐⭐ 4.9/5 (156 reviews)</div>
+                        <button class="btn btn-primary">Book Appointment</button>
+                    </div>
+                    <div class="doctor-card">
+                        <div class="doctor-avatar">👩‍⚕️</div>
+                        <h3>Dr. Emily Rodriguez</h3>
+                        <p><strong>Dermatologist</strong></p>
+                        <p>Board-certified dermatologist with 10+ years experience. Specializes in skin cancer detection, cosmetic dermatology, and acne treatment.</p>
+                        <div class="doctor-rating">⭐⭐⭐⭐⭐ 4.7/5 (189 reviews)</div>
+                        <button class="btn btn-primary">Book Appointment</button>
+                    </div>
+                    <div class="doctor-card">
+                        <div class="doctor-avatar">👨‍⚕️</div>
+                        <h3>Dr. James Thompson</h3>
+                        <p><strong>Neurologist</strong></p>
+                        <p>Expert in neurological disorders with 20+ years experience. Specializes in epilepsy, stroke treatment, and movement disorders.</p>
+                        <div class="doctor-rating">⭐⭐⭐⭐⭐ 4.8/5 (142 reviews)</div>
+                        <button class="btn btn-primary">Book Appointment</button>
+                    </div>
+                    <div class="doctor-card">
+                        <div class="doctor-avatar">👩‍⚕️</div>
+                        <h3>Dr. Lisa Park</h3>
+                        <p><strong>Gynecologist</strong></p>
+                        <p>Women's health specialist with 14+ years experience. Expert in reproductive health, prenatal care, and minimally invasive surgery.</p>
+                        <div class="doctor-rating">⭐⭐⭐⭐⭐ 4.9/5 (234 reviews)</div>
+                        <button class="btn btn-primary">Book Appointment</button>
+                    </div>
+                    <div class="doctor-card">
+                        <div class="doctor-avatar">👨‍⚕️</div>
+                        <h3>Dr. Robert Martinez</h3>
+                        <p><strong>Psychiatrist</strong></p>
+                        <p>Mental health specialist with 16+ years experience. Focuses on anxiety, depression, ADHD, and cognitive behavioral therapy.</p>
+                        <div class="doctor-rating">⭐⭐⭐⭐⭐ 4.8/5 (178 reviews)</div>
+                        <button class="btn btn-primary">Book Appointment</button>
+                    </div>
+                    <div class="doctor-card">
+                        <div class="doctor-avatar">👩‍⚕️</div>
+                        <h3>Dr. Amanda Foster</h3>
+                        <p><strong>Endocrinologist</strong></p>
+                        <p>Hormone and diabetes specialist with 13+ years experience. Expert in thyroid disorders, diabetes management, and metabolic conditions.</p>
+                        <div class="doctor-rating">⭐⭐⭐⭐⭐ 4.7/5 (165 reviews)</div>
+                        <button class="btn btn-primary">Book Appointment</button>
+                    </div>
+                    <div class="doctor-card">
+                        <div class="doctor-avatar">👨‍⚕️</div>
+                        <h3>Dr. Kevin Lee</h3>
+                        <p><strong>Gastroenterologist</strong></p>
+                        <p>Digestive health expert with 17+ years experience. Specializes in colonoscopy, IBD treatment, and liver disease management.</p>
+                        <div class="doctor-rating">⭐⭐⭐⭐⭐ 4.8/5 (198 reviews)</div>
+                        <button class="btn btn-primary">Book Appointment</button>
+                    </div>
+                    <div class="doctor-card">
+                        <div class="doctor-avatar">👩‍⚕️</div>
+                        <h3>Dr. Rachel Green</h3>
+                        <p><strong>Ophthalmologist</strong></p>
+                        <p>Eye care specialist with 11+ years experience. Expert in cataract surgery, glaucoma treatment, and retinal disorders.</p>
+                        <div class="doctor-rating">⭐⭐⭐⭐⭐ 4.9/5 (221 reviews)</div>
+                        <button class="btn btn-primary">Book Appointment</button>
+                    </div>
+                    <div class="doctor-card">
+                        <div class="doctor-avatar">👨‍⚕️</div>
+                        <h3>Dr. Mark Wilson</h3>
+                        <p><strong>Pulmonologist</strong></p>
+                        <p>Lung and respiratory specialist with 19+ years experience. Expert in asthma, COPD, sleep disorders, and critical care medicine.</p>
+                        <div class="doctor-rating">⭐⭐⭐⭐⭐ 4.8/5 (173 reviews)</div>
+                        <button class="btn btn-primary">Book Appointment</button>
+                    </div>
+                    <div class="doctor-card">
+                        <div class="doctor-avatar">👩‍⚕️</div>
+                        <h3>Dr. Jennifer Adams</h3>
+                        <p><strong>Rheumatologist</strong></p>
+                        <p>Autoimmune and joint disease specialist with 15+ years experience. Expert in arthritis, lupus, and inflammatory conditions.</p>
+                        <div class="doctor-rating">⭐⭐⭐⭐⭐ 4.7/5 (147 reviews)</div>
+                        <button class="btn btn-primary">Book Appointment</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Facilities Section -->
+        <section id="facilities" class="section" style="display: none;">
+            <div class="container">
+                <h2 class="section-title">Our Facilities & Services</h2>
+                <div class="cards-grid">
+                    <div class="card">
+                        <span class="card-icon">🏥</span>
+                        <h3>Modern Equipment</h3>
+                        <p>State-of-the-art medical equipment including MRI, CT scans, X-ray machines, and advanced diagnostic tools for accurate diagnosis.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">🚑</span>
+                        <h3>Emergency Care</h3>
+                        <p>24/7 emergency services with rapid response teams and fully equipped ambulances for critical care situations.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">💊</span>
+                        <h3>Pharmacy Services</h3>
+                        <p>On-site pharmacy with a wide range of medications, prescription filling, and medication counseling services.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">🔬</span>
+                        <h3>Laboratory</h3>
+                        <p>Comprehensive lab services including blood tests, pathology, microbiology, and rapid diagnostic testing.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">🏃‍♂️</span>
+                        <h3>Rehabilitation</h3>
+                        <p>Physical therapy, occupational therapy, and rehabilitation services to help patients recover and regain mobility.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">📱</span>
+                        <h3>Telemedicine</h3>
+                        <p>Virtual consultations and remote monitoring services for convenient healthcare access from home.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section" style="display: none;">
+            <div class="container">
+                <h2 class="section-title">Contact Us</h2>
+                
+                <!-- Contact Info Cards -->
+                <div class="contact-info" style="margin-bottom: 4rem;">
+                    <div class="cards-grid">
+                        <div class="contact-card" style="background: rgba(255, 255, 255, 0.95); border-radius: 15px; padding: 2rem; text-align: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);">
+                            <div style="font-size: 3rem; margin-bottom: 1rem; color: #667eea;">📞</div>
+                            <h3 style="color: #667eea; margin-bottom: 1rem;">Phone Support</h3>
+                            <p style="margin-bottom: 0.5rem;"><strong>Main Line:</strong> +1 (555) 123-4567</p>
+                            <p style="margin-bottom: 0.5rem;"><strong>Emergency:</strong> +1 (555) 911-HELP</p>
+                            <p style="color: #666; font-size: 0.9rem;">Available 24/7 for emergencies<br>Regular hours: Mon-Fri 8AM-8PM</p>
+                        </div>
+                        <div class="contact-card" style="background: rgba(255, 255, 255, 0.95); border-radius: 15px; padding: 2rem; text-align: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);">
+                            <div style="font-size: 3rem; margin-bottom: 1rem; color: #667eea;">📧</div>
+                            <h3 style="color: #667eea; margin-bottom: 1rem;">Email Support</h3>
+                            <p style="margin-bottom: 0.5rem;"><strong>General:</strong> info@drfinder.com</p>
+                            <p style="margin-bottom: 0.5rem;"><strong>Support:</strong> support@drfinder.com</p>
+                            <p style="color: #666; font-size: 0.9rem;">We respond within 24 hours<br>Priority support for urgent matters</p>
+                        </div>
+                        <div class="contact-card" style="background: rgba(255, 255, 255, 0.95); border-radius: 15px; padding: 2rem; text-align: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);">
+                            <div style="font-size: 3rem; margin-bottom: 1rem; color: #667eea;">📍</div>
+                            <h3 style="color: #667eea; margin-bottom: 1rem;">Visit Our Office</h3>
+                            <p style="margin-bottom: 0.5rem;"><strong>Address:</strong></p>
+                            <p style="margin-bottom: 1rem;">123 Healthcare Plaza<br>Medical District, NY 10001</p>
+                            <p style="color: #666; font-size: 0.9rem;">Mon-Fri: 9AM-6PM<br>Sat: 10AM-4PM</p>
+                        </div>
+                        <div class="contact-card" style="background: rgba(255, 255, 255, 0.95); border-radius: 15px; padding: 2rem; text-align: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);">
+                            <div style="font-size: 3rem; margin-bottom: 1rem; color: #667eea;">💬</div>
+                            <h3 style="color: #667eea; margin-bottom: 1rem;">Live Chat</h3>
+                            <p style="margin-bottom: 1rem;">Get instant help from our support team</p>
+                            <button class="btn btn-primary" onclick="alert('Live chat feature coming soon!')">Start Chat</button>
+                            <p style="color: #666; font-size: 0.9rem; margin-top: 1rem;">Available Mon-Fri 8AM-8PM</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;">
+                    <form class="contact-form" onsubmit="handleContactForm(event)">
+                        <h3 style="color: #667eea; margin-bottom: 1.5rem; text-align: center;">Send Us a Message</h3>
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="inquiry-type">Inquiry Type</label>
+                            <select id="inquiry-type" name="inquiry-type" style="width: 100%; padding: 0.75rem; border: 2px solid #e1e5e9; border-radius: 8px; font-size: 1rem;">
+                                <option value="">Select an option</option>
+                                <option value="appointment">Book Appointment</option>
+                                <option value="medical">Medical Question</option>
+                                <option value="technical">Technical Support</option>
+                                <option value="billing">Billing Inquiry</option>
+                                <option value="feedback">Feedback</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject *</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="Please provide details about your inquiry..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                <input type="checkbox" required>
+                                <span style="font-size: 0.9rem;">I agree to the <a href="#" style="color: #667eea;">Privacy Policy</a> and <a href="#" style="color: #667eea;">Terms of Service</a></span>
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                    </form>
+
+                    <!-- FAQ Section -->
+                    <div class="faq-section" style="background: rgba(255, 255, 255, 0.95); border-radius: 15px; padding: 2rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);">
+                        <h3 style="color: #667eea; margin-bottom: 1.5rem; text-align: center;">Frequently Asked Questions</h3>
+                        
+                        <div class="faq-item" style="margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid #eee;">
+                            <h4 style="color: #333; margin-bottom: 0.5rem;">How do I book an appointment?</h4>
+                            <p style="color: #666; font-size: 0.9rem;">You can book appointments directly through our platform by selecting your preferred doctor and available time slot. You'll receive instant confirmation.</p>
+                        </div>
+                        
+                        <div class="faq-item" style="margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid #eee;">
+                            <h4 style="color: #333; margin-bottom: 0.5rem;">Is telemedicine available?</h4>
+                            <p style="color: #666; font-size: 0.9rem;">Yes! Many of our doctors offer virtual consultations. Look for the telemedicine icon when booking your appointment.</p>
+                        </div>
+                        
+                        <div class="faq-item" style="margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid #eee;">
+                            <h4 style="color: #333; margin-bottom: 0.5rem;">What insurance do you accept?</h4>
+                            <p style="color: #666; font-size: 0.9rem;">We work with most major insurance providers. Check with your specific doctor's office for detailed insurance information.</p>
+                        </div>
+                        
+                        <div class="faq-item" style="margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid #eee;">
+                            <h4 style="color: #333; margin-bottom: 0.5rem;">Can I cancel or reschedule?</h4>
+                            <p style="color: #666; font-size: 0.9rem;">Yes, you can cancel or reschedule appointments up to 24 hours in advance through your patient portal or by calling our support line.</p>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <h4 style="color: #333; margin-bottom: 0.5rem;">How secure is my medical information?</h4>
+                            <p style="color: #666; font-size: 0.9rem;">We use bank-level encryption and comply with all HIPAA regulations to ensure your medical information remains completely secure and private.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2 style="text-align: center; color: #667eea; margin-bottom: 2rem;">Login</h2>
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('signupModal')">&times;</span>
+            <h2 style="text-align: center; color: #667eea; margin-bottom: 2rem;">Sign Up</h2>
+            <form onsubmit="handleSignup(event)">
+                <div class="form-group">
+                    <label for="signupName">Full Name</label>
+                    <input type="text" id="signupName" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Sign Up</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Section Navigation
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).style.display = 'block';
+            
+            // Trigger animation
+            setTimeout(() => {
+                document.getElementById(sectionId).style.animation = 'fadeInUp 0.8s ease forwards';
+            }, 50);
+        }
+
+        // Modal Functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+
+        // Form Handlers
+        function handleLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            // Simulate login process
+            alert(`Welcome back! Login successful for ${email}`);
+            closeModal('loginModal');
+            
+            // Reset form
+            event.target.reset();
+        }
+
+        function handleSignup(event) {
+            event.preventDefault();
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+            
+            // Simulate signup process
+            alert(`Welcome to DR.FINDER, ${name}! Your account has been created successfully.`);
+            closeModal('signupModal');
+            
+            // Reset form
+            event.target.reset();
+        }
+
+        function handleContactForm(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            
+            // Simulate form submission
+            alert(`Thank you ${name}! Your message about "${subject}" has been sent. We'll get back to you at ${email} soon.`);
+            
+            // Reset form
+            event.target.reset();
+        }
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to navbar
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        // Initialize with home section visible
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('home');
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98714d78e7558602',t:'MTc1OTIwOTk1Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

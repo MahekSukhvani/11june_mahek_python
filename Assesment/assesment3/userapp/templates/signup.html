@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediTech | Sign Up</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { poppins: ['Poppins', 'sans-serif'] },
+          colors: {
+            primary: '#007BFF',
+            secondary: '#00C3FF',
+            lightbg: '#F0F9FF',
+          },
+        },
+      },
+    };
+  </script>
+</head>
+
+<body class="font-poppins min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 via-sky-50 to-cyan-100">
+  <div class="bg-white shadow-2xl rounded-3xl w-full max-w-md p-8 md:p-10 transition-transform hover:scale-[1.02]">
+
+    <!-- Logo -->
+    <div class="text-center mb-6">
+      <h1 class="text-3xl font-semibold text-primary mt-2">Medi<span class="text-secondary">Tech</span></h1>
+      <p class="text-gray-500 text-sm mt-1">Create your account to get started 🚀</p>
+    </div>
+
+    <!-- Signup Form -->
+    <form method="POST" action="/signup/" class="space-y-5">
+      {% csrf_token %}
+
+      <!-- Name -->
+      <div class="relative">
+        <input type="text" name="fnm" id="name" required
+          class="peer w-full border border-blue-200 rounded-xl py-3 px-4 placeholder-transparent focus:outline-none focus:ring-2 focus:ring-primary transition"
+          placeholder="Full Name">
+        <label for="name"
+          class="absolute left-4 top-3 text-gray-500 text-sm transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-focus:top-[-10px] peer-focus:text-primary peer-focus:text-sm bg-white px-1">
+          Full Name
+        </label>
+      </div>
+
+      <!-- Email -->
+      <div class="relative">
+        <input type="email" name="email" id="email" required
+          class="peer w-full border border-blue-200 rounded-xl py-3 px-4 placeholder-transparent focus:outline-none focus:ring-2 focus:ring-primary transition"
+          placeholder="Email Address">
+        <label for="email"
+          class="absolute left-4 top-3 text-gray-500 text-sm transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-focus:top-[-10px] peer-focus:text-primary peer-focus:text-sm bg-white px-1">
+          Email Address
+        </label>
+      </div>
+
+      <!-- Mobile -->
+      <div class="relative">
+        <input type="text" name="mob" id="mobile" required
+          class="peer w-full border border-blue-200 rounded-xl py-3 px-4 placeholder-transparent focus:outline-none focus:ring-2 focus:ring-primary transition"
+          placeholder="Mobile Number">
+        <label for="mobile"
+          class="absolute left-4 top-3 text-gray-500 text-sm transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-focus:top-[-10px] peer-focus:text-primary peer-focus:text-sm bg-white px-1">
+          Mobile Number
+        </label>
+      </div>
+
+      <!-- Password -->
+      <div class="relative">
+        <input type="password" name="pas" id="password" required
+          class="peer w-full border border-blue-200 rounded-xl py-3 px-4 placeholder-transparent focus:outline-none focus:ring-2 focus:ring-primary transition"
+          placeholder="Password">
+        <label for="password"
+          class="absolute left-4 top-3 text-gray-500 text-sm transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-focus:top-[-10px] peer-focus:text-primary peer-focus:text-sm bg-white px-1">
+          Password
+        </label>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit"
+        class="w-full bg-gradient-to-r from-primary to-secondary text-white py-3 rounded-xl font-medium hover:shadow-lg hover:opacity-90 transition">
+        Sign Up
+      </button>
+
+      <!-- Already Have an Account -->
+      <p class="text-center text-gray-600 text-sm mt-3">
+        Already have an account?
+        <a href="/login" class="text-primary font-medium hover:underline">Login</a>
+      </p>
+    </form>
+  </div>
+</body>
+
+</html>

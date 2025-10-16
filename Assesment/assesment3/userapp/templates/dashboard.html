@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MediTech | Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#007BFF',
+            secondary: '#00C3FF',
+            lightbg: '#F0F9FF',
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    /* Hide all sections by default */
+    .section {
+      display: none;
+    }
+
+    /* Active section */
+    .active {
+      display: block;
+    }
+  </style>
+</head>
+
+<body class="bg-gradient-to-br from-blue-100 via-sky-50 to-cyan-100 font-poppins min-h-screen">
+
+  <!-- Navbar -->
+  <nav class="bg-white shadow-md py-4 px-6 flex justify-between items-center sticky top-0 z-50">
+    <h1 class="text-2xl font-bold text-primary">Medi<span class="text-secondary">Tech</span></h1>
+    <ul class="flex space-x-6 text-gray-700 font-medium">
+      <li><button onclick="showSection('home')" class="hover:text-primary">Home</button></li>
+      <li><button onclick="showSection('about')" class="hover:text-primary">About Us</button></li>
+      <li><button onclick="showSection('appointment')" class="hover:text-primary">Appointment Booking</button></li>
+      <li><button onclick="showSection('contact')" class="hover:text-primary">Contact Us</button></li>
+    </ul>
+  </nav>
+
+  <div class="max-w-6xl mx-auto p-6">
+
+    <!-- Home Section -->
+<div id="home" class="section bg-white rounded-2xl p-8 shadow-lg mb-6">
+  <h2 class="text-3xl font-bold text-primary mb-4">Welcome to MediTech</h2>
+  
+  <!-- Welcome Message -->
+  <p class="text-gray-700 mb-6">
+    Your health is our priority. At MediTech, we combine advanced medical technology with compassionate care to provide the best healthcare services for you and your family.
+  </p>
+
+  <!-- Featured Services -->
+  <h3 class="text-xl font-semibold text-secondary mb-4">Our Services</h3>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+    <div class="bg-lightbg p-4 rounded-lg shadow hover:shadow-lg transition">
+      <h4 class="font-semibold text-primary mb-2">General Checkup</h4>
+      <p class="text-gray-700 text-sm">Comprehensive health checkups to keep you fit and healthy.</p>
+    </div>
+    <div class="bg-lightbg p-4 rounded-lg shadow hover:shadow-lg transition">
+      <h4 class="font-semibold text-primary mb-2">Specialist Consultation</h4>
+      <p class="text-gray-700 text-sm">Meet our expert doctors for personalized care and treatment.</p>
+    </div>
+    <div class="bg-lightbg p-4 rounded-lg shadow hover:shadow-lg transition">
+      <h4 class="font-semibold text-primary mb-2">Diagnostic Tests</h4>
+      <p class="text-gray-700 text-sm">Advanced laboratory and imaging tests for accurate diagnosis.</p>
+    </div>
+  </div>
+
+  <!-- Quick Stats -->
+  <h3 class="text-xl font-semibold text-secondary mb-4">Why Choose Us</h3>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+    <div class="p-4 bg-lightbg rounded-lg shadow">
+      <h4 class="text-primary font-bold text-2xl">10+</h4>
+      <p class="text-gray-700 text-sm">Years of Experience</p>
+    </div>
+    <div class="p-4 bg-lightbg rounded-lg shadow">
+      <h4 class="text-primary font-bold text-2xl">50+</h4>
+      <p class="text-gray-700 text-sm">Expert Doctors</p>
+    </div>
+    <div class="p-4 bg-lightbg rounded-lg shadow">
+      <h4 class="text-primary font-bold text-2xl">1000+</h4>
+      <p class="text-gray-700 text-sm">Happy Patients</p>
+    </div>
+    <div class="p-4 bg-lightbg rounded-lg shadow">
+      <h4 class="text-primary font-bold text-2xl">24/7</h4>
+      <p class="text-gray-700 text-sm">Support & Services</p>
+    </div>
+  </div>
+
+  <!-- Testimonials -->
+  <h3 class="text-xl font-semibold text-secondary mb-4 mt-6">What Our Patients Say</h3>
+  <div class="space-y-4">
+    <div class="bg-lightbg p-4 rounded-lg shadow">
+      <p class="text-gray-700">"MediTech has been amazing! The doctors are very professional and caring. Highly recommend!"</p>
+      <p class="text-gray-500 text-sm mt-2">- Alice Johnson</p>
+    </div>
+    <div class="bg-lightbg p-4 rounded-lg shadow">
+      <p class="text-gray-700">"Quick appointment booking and excellent service. I felt very comfortable throughout my visit."</p>
+      <p class="text-gray-500 text-sm mt-2">- Michael Smith</p>
+    </div>
+  </div>
+</div>
+
+
+    <!-- About Us Section -->
+<div id="about" class="section bg-white rounded-2xl p-8 shadow-lg mb-6">
+  <h2 class="text-3xl font-bold text-primary mb-4">About Us</h2>
+  
+  <!-- Intro -->
+  <p class="text-gray-700 mb-4">
+    MediTech has been serving the community with professional medical services for over 10 years. Our dedicated team of doctors, nurses, and support staff ensures the highest quality care for every patient.
+  </p>
+
+  <!-- Mission & Vision -->
+  <div class="mb-6">
+    <h3 class="text-xl font-semibold text-secondary mb-2">Our Mission</h3>
+    <p class="text-gray-700 mb-2">To provide accessible, reliable, and compassionate healthcare to all, leveraging modern technology and skilled professionals.</p>
+    
+    <h3 class="text-xl font-semibold text-secondary mb-2">Our Vision</h3>
+    <p class="text-gray-700">To be the leading healthcare provider known for excellence, trust, and innovation in patient care.</p>
+  </div>
+
+  <!-- Core Values -->
+  <div class="mb-6">
+    <h3 class="text-xl font-semibold text-secondary mb-2">Core Values</h3>
+    <ul class="list-disc list-inside text-gray-700">
+      <li>Patient-centered care</li>
+      <li>Integrity and transparency</li>
+      <li>Continuous improvement</li>
+      <li>Teamwork and collaboration</li>
+      <li>Innovation in healthcare</li>
+    </ul>
+  </div>
+
+  <!-- Our Team -->
+  <div class="mb-6">
+    <h3 class="text-xl font-semibold text-secondary mb-4">Our Expert Doctors</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <!-- Doctor Card 1 -->
+      <div class="bg-lightbg p-4 rounded-lg shadow hover:shadow-lg transition">
+        <h4 class="font-semibold text-primary">Dr. Sharma</h4>
+        <p class="text-gray-700 text-sm">Cardiologist with 15 years of experience in heart care.</p>
+      </div>
+      <!-- Doctor Card 2 -->
+      <div class="bg-lightbg p-4 rounded-lg shadow hover:shadow-lg transition">
+        <h4 class="font-semibold text-primary">Dr. Mehta</h4>
+        <p class="text-gray-700 text-sm">Neurologist specializing in brain and nervous system disorders.</p>
+      </div>
+      <!-- Doctor Card 3 -->
+      <div class="bg-lightbg p-4 rounded-lg shadow hover:shadow-lg transition">
+        <h4 class="font-semibold text-primary">Dr. Singh</h4>
+        <p class="text-gray-700 text-sm">General Physician providing comprehensive primary care.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Why Choose Us -->
+  <div>
+    <h3 class="text-xl font-semibold text-secondary mb-2">Why Choose MediTech?</h3>
+    <ul class="list-disc list-inside text-gray-700">
+      <li>Experienced and certified medical professionals</li>
+      <li>State-of-the-art facilities and equipment</li>
+      <li>Personalized treatment plans for every patient</li>
+      <li>Easy appointment booking and online support</li>
+      <li>Focus on patient comfort and satisfaction</li>
+    </ul>
+  </div>
+</div>
+
+
+    <!-- Appointment Booking Section -->
+    <div id="appointment" class="section bg-white rounded-2xl p-8 shadow-lg mb-6">
+      <h2 class="text-3xl font-bold text-primary mb-4">Book an Appointment</h2>
+      <form method="POST" action="/dashboard/appointment/" class="space-y-4">
+        {% csrf_token %}
+        <div>
+          <label class="block text-gray-700 font-medium mb-1">Current Date</label>
+          <input type="date" name="currentdate" class="w-full border border-blue-200 rounded-lg py-2 px-3 focus:ring-2 focus:ring-primary focus:outline-none">
+        </div>
+        <div>
+          <label class="block text-gray-700 font-medium mb-1">Appointment Date</label>
+          <input type="date" name="appointmentdate" class="w-full border border-blue-200 rounded-lg py-2 px-3 focus:ring-2 focus:ring-primary focus:outline-none">
+        </div>
+        <div>
+          <label class="block text-gray-700 font-medium mb-1">Doctor Name</label>
+          <input type="text" name="drname" placeholder="Dr. John Doe" class="w-full border border-blue-200 rounded-lg py-2 px-3 focus:ring-2 focus:ring-primary focus:outline-none">
+        </div>
+        <div>
+          <label class="block text-gray-700 font-medium mb-1">Test Name (if needed)</label>
+          <input type="text" name="testname" placeholder="Blood Test" class="w-full border border-blue-200 rounded-lg py-2 px-3 focus:ring-2 focus:ring-primary focus:outline-none">
+        </div>
+        <button type="submit" class="bg-gradient-to-r from-primary to-secondary text-white py-2 px-4 rounded-lg font-medium hover:opacity-90 transition">Book Appointment</button>
+      </form>
+    </div>
+
+  <!-- Contact Us Section -->
+<div id="contact" class="section bg-white rounded-2xl p-8 shadow-lg mb-6">
+  <h2 class="text-3xl font-bold text-primary mb-4">Contact Us</h2>
+
+  <p class="text-gray-700 mb-6">
+    Have questions or need assistance? Get in touch with us. We are here to help you 24/7.
+  </p>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Contact Info -->
+    <div class="space-y-4">
+      <div class="flex items-center space-x-3">
+        <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+        <span class="text-gray-700">Email: support@meditech.com</span>
+      </div>
+      <div class="flex items-center space-x-3">
+        <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3l2 3h4l2-3h3a2 2 0 012 2v16a2 2 0 01-2 2H5a2 2 0 01-2-2V5z" />
+        </svg>
+        <span class="text-gray-700">Phone: +91 9876543210</span>
+      </div>
+      <div class="flex items-center space-x-3">
+        <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 12l4.243-4.243M6.343 7.343L10.586 12l-4.243 4.243" />
+        </svg>
+        <span class="text-gray-700">Address: near balaji hanuman tempal , medical line , delhi</span>
+      </div>
+    </div>
+
+    <!-- Contact Form -->
+    <form class="space-y-4 bg-lightbg p-4 rounded-lg shadow">
+      <div>
+        <label for="name" class="block text-gray-700 font-medium mb-1">Your Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name"
+          class="w-full border border-blue-200 rounded-xl py-2 px-4 focus:outline-none focus:ring-2 focus:ring-primary">
+      </div>
+
+      <div>
+        <label for="email" class="block text-gray-700 font-medium mb-1">Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email"
+          class="w-full border border-blue-200 rounded-xl py-2 px-4 focus:outline-none focus:ring-2 focus:ring-primary">
+      </div>
+
+      <div>
+        <label for="message" class="block text-gray-700 font-medium mb-1">Message</label>
+        <textarea id="message" name="message" rows="4" placeholder="Type your message"
+          class="w-full border border-blue-200 rounded-xl py-2 px-4 focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
+      </div>
+
+      <button type="submit" class="bg-gradient-to-r from-primary to-secondary text-white py-2 px-4 rounded-xl font-medium hover:opacity-90 transition">
+        Send Message
+      </button>
+    </form>
+  </div>
+
+  <!-- JS to switch sections -->
+  <script>
+    function showSection(sectionId) {
+      const sections = document.querySelectorAll('.section');
+      sections.forEach(section => section.classList.remove('active'));
+      document.getElementById(sectionId).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+
+</html>
